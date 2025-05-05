@@ -1,0 +1,40 @@
+app-id: org.linphone.desktop
+branch: stable
+runtime: org.freedesktop.Platform
+runtime-version: '24.08'
+sdk: org.freedesktop.Sdk
+command: /app/AppRun
+separate-locales: false
+finish-args:
+  - --share=ipc
+  - --share=network
+  - --socket=x11
+  - --socket=pulseaudio
+  - --device=dri
+  - --own-name=org.linphone.SingleApplication
+
+modules:
+  - name: linphone-desktop
+    buildsystem: simple
+    build-commands:
+      - chmod +x Linphone.AppImage
+      - ./Linphone.AppImage --appimage-extract
+      - mv squashfs-root/* /app
+      - rm -rf squashfs-root
+      - install -Dm644 /app/linphone.desktop
+        /app/share/applications/org.linphone.desktop.desktop
+      - desktop-file-edit --set-icon org.linphone.desktop --set-key Exec --set-value
+        '/app/AppRun' /app/share/applications/org.linphone.desktop.desktop
+      - install -Dm644 /app/usr/share/icons/hicolor/32x32/apps/linphone.png
+        /app/share/icons/hicolor/32x32/apps/org.linphone.desktop.png
+      - install -Dm644 /app/usr/share/icons/hicolor/64x64/apps/linphone.png
+        /app/share/icons/hicolor/64x64/apps/org.linphone.desktop.png
+      - install -Dm644 /app/usr/share/icons/hicolor/128x128/apps/linphone.png
+        /app/share/icons/hicolor/128x128/apps/org.linphone.desktop.png
+      - install -Dm644 /app/usr/share/icons/hicolor/256x256/apps/linphone.png
+        /app/share/icons/hicolor/256x256/apps/org.linphone.desktop.png
+    sources:
+      - type: file
+        url: https://download.linphone.org/releases/linux/app/Linphone-5.2.6.AppImage
+        sha256: 84b3f0accf8a34cbd45550bfde3b5a72f392801cec9525f0b8780e6e97444762
+        dest-filename: Linphone.AppImage
