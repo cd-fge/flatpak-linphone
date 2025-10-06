@@ -1,7 +1,7 @@
 app-id: org.linphone.desktop
 branch: stable
 runtime: org.freedesktop.Platform
-runtime-version: '24.08'
+runtime-version: '25.08'
 sdk: org.freedesktop.Sdk
 command: /app/AppRun
 separate-locales: false
