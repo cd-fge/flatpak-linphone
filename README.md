@@ -3,6 +3,6 @@
 ## Install
 
 ```
-flatpak install flathub org.freedesktop.Sdk//25.08
-flatpak-builder --user --install --default-branch stable --force-clean build-dir --sandbox org.linphone.desktop.yaml
+flatpak install flathub org.freedesktop.Sdk//26.08
+flatpak-builder --user --install --default-branch stable --force-clean --sandbox build-dir org.linphone.desktop.yaml
 ```
